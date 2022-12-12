@@ -74,7 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     public List<Account> getAccounts(){
-        List<Account> accountList = new ArrayList<Account>();
+        List<Account> accountList = new ArrayList<>();
 
         String selectQuery = "SELECT  * FROM " + TABLE1_NAME;
 
@@ -86,13 +86,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String accountNO = cursor.getString(0);
                 String bankName = cursor.getString(1);
                 String accountHoldersName = cursor.getString(2);
-                double balance = Integer.parseInt(cursor.getString(3));
+                double balance = Double.parseDouble(cursor.getString(3));
 
                 Account account = new Account(accountNO,bankName,accountHoldersName,balance);
                 accountList.add(account);
 
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         return accountList;
     }
@@ -156,7 +157,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Date date = null;
             do {
                 try {
-                    date = new SimpleDateFormat("dd/MM/yyyy").parse(cursor.getString(1));;
+                    date = new SimpleDateFormat("dd/MM/yyyy").parse(cursor.getString(1));
                 }
                 catch (Exception e){}
 
@@ -167,7 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     expenseTypeEn = ExpenseType.EXPENSE;
                 else
                     expenseTypeEn = ExpenseType.INCOME;
-                double amount = Integer.parseInt(cursor.getString(4));
+                double amount = Double.parseDouble(cursor.getString(4));
 
                 Transaction transaction = new Transaction(date,accountNO,expenseTypeEn,amount);
                 transactionList.add(transaction);
@@ -175,6 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
         return transactionList;
     }
 }
