@@ -21,8 +21,8 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper dbHelper = null;
-    private static final int VERSION = 1;
-    public static final String DATABASE_NAME = "ExpenseManager.db";
+    private static final int VERSION = 2;
+    public static final String DATABASE_NAME = "200652D.db";
 
     public static final String TABLE1_NAME = "account_info";
     public static final String TABLE1_COL_1 = "accountNo";
